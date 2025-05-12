@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8" />
+  <title>Calendari B100 - Echo Show</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: system-ui, sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+    #calendars {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      height: 100vh;
+      gap: 20px;
+      padding: 10px;
+    }
+    .fc {
+      background-color: #fff;
+      color: #000;
+      border-radius: 12px;
+      padding: 5px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+      --fc-border-color: rgba(0, 0, 0, 0.2);
+    }
+    .fc-toolbar-title {
+      font-size: 1.2rem;
+    }
+    .fc-daygrid-day-number {
+      font-size: 1rem;
+    }
+    .fc-event {
+      font-size: 0.85rem;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div id="calendars">
+    <div id="cal1"></div>
+    <div id="cal2"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const today = new Date();
+      const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+
+      const calendar1 = new FullCalendar.Calendar(document.getElementById('cal1'), {
+        plugins: [ FullCalendar.dayGridPlugin, FullCalendar.googleCalendarPlugin ],
+        initialView: 'dayGridMonth',
+        locale: 'ca',
+        firstDay: 1,
+        height: '100%',
+        googleCalendarApiKey: 'AIzaSyAoAMNTx-i8BlXKG4mcFKKn30I-awTT70o',
+        initialDate: today,
+        eventSources: [
+          {
+            googleCalendarId: 'rb100.sants@gmail.com',
+            color: '#1e88e5'
+          },
+          {
+            googleCalendarId: 'rb100he.sants@gmail.com',
+            color: '#d81b60'
+          }
+        ]
+      });
+
+      const calendar2 = new FullCalendar.Calendar(document.getElementById('cal2'), {
+        plugins: [ FullCalendar.dayGridPlugin, FullCalendar.googleCalendarPlugin ],
+        initialView: 'dayGridMonth',
+        locale: 'ca',
+        firstDay: 1,
+        height: '100%',
+        googleCalendarApiKey: 'AIzaSyAoAMNTx-i8BlXKG4mcFKKn30I-awTT70o',
+        initialDate: nextMonth,
+        eventSources: [
+          {
+            googleCalendarId: 'rb100.sants@gmail.com',
+            color: '#1e88e5'
+          },
+          {
+            googleCalendarId: 'rb100he.sants@gmail.com',
+            color: '#d81b60'
+          }
+        ]
+      });
+
+      calendar1.render();
+      calendar2.render();
+    });
+  </script>
+</body>
+</html>
